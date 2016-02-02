@@ -119,10 +119,10 @@
 
 \section*{Answer 2}
 \begin{enumerate}
-	\item[a.] MPL = 4, CPU utilization = 26/44, $speedup = \frac{1}{1-\frac{26}{44} + \frac{26/44}{r}}$ 
-	\item[b.] Take $r \rarrow \inf$, $\frac{1}{1 - (26/44)} = 2.44$
+	\item[a.] MPL = 4, CPU utilization = 26/44, $speedup = \frac{1}{1-\frac{26}{44} + \frac{26/44}{r}}$\\
+	\includegraphics*[scale=0.5]{2plot.png}
+	\item[b.] Take $r \rightarrow \inf$, $\frac{1}{1 - (26/44)} = 2.44$
 	\item[c.] Disk util = 42/44, Network util = 24/44, $speedup_{disk} = \frac{1}{1 - \frac{42}{44}} = 22$, $speedup_{network} = \frac{1}{1 - \frac{24}{44}} = 2.2$
-	\item[d.] None
 \end{enumerate}
 
 \section*{Answer 3}
@@ -142,12 +142,33 @@
 \begin{enumerate}
 	\item[a.] $150/15000 = .1$ wasted for overhead  
 	$T(H,P) = 9 * (1 - P)^H$
-
 	\item[b.] $T(1,.01) = 9 * (.99) = 8.91Mpbs$
 	\item[c.] $6 < 9 * (1 - P)^H$\\
 	$.66 < (1 - P)^H$\\
-	$\sqrt[n]{.66} < 1 - P$\\
-	$P < 1 - \sqrt[n]{.66}$]]
+	$\sqrt[H]{.66} < 1 - P$\\
+	$P < 1 - \sqrt[H]{.66}$
 \end{enumerate}
+
+\section*{Answer 5}
+\begin{enumerate}
+	\item[a.] Applying the algorithm, $C = 50 + 10 + 40 + 50 = 150$\\
+		\includegraphics*[scale=0.3]{5graph.jpg}
+	\item[b.] $b = $ all the bottlenecks of each path\\
+	Run the max flow algorithm again.\\
+	$u = $ the first edge not in $b$ to reach 0\\
+	If $u$ does not exist, then upgrading any of the bottlenecks will increase the capcity of of the system\\
+	If $u$ does exist, then upgrading $u$ will increase the capacity of the system
+	Applying this above, we can see that $u$ is the edge connecting the node with 3 arrows in, to the one with 2 arrows in (cap = 100)\\
+	We can increase that capcity of $u$ to 110 for a total capacity of 160 for the network
+	
+	\item[c.] The maximum capacity of upgrading a single link in this system is 160.  The reason is that the only link that is 
+	limiting the network capcity is the link found above with the algorithm.  Because there are 3 paths through that link, it's capcity
+	is used up, while there are still other paths with capacity that could use that link.  Incrasing this link will allow for other links
+	with useable capacity to use this link.
+	
+	\item[d.] I would take down the link that was found by the algorithm above.  Taking this link down would create only 1 useable link,
+	giving the network a capcity of 50 (compared to the previous 150).  Because a this is the internal link that the most paths rely on, it
+	has the most damage to being taken out of the system
+\end{enumerate}•
 
 \end{document} 
