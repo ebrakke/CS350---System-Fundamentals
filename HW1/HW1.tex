@@ -100,14 +100,54 @@
 
 	\item[b.] $1 req / .019s = 52.63req / second$
 
-	\item[c.] Total time: 27ms\\ (Assuming III takes priority over V because each process arrives there at the same time)\\
-	CPU utilization: $\frac{10ms}{27ms} = .370$ 37.0\%\\
-	Disk utilization: $\frac{16ms}{27ms} = .593$ 59.3\%\\
-	Network utilization: $\frac{12ms}{27ms} = .444$ 44.4\%\\
+	\item[c.] Total time: 28ms (Assuming first process wins in ties)\\
+	CPU utilization: $\frac{12ms}{28ms} = .429$ 42.9\%\\
+	Disk utilization: $\frac{21ms}{28ms} = .750$ 75.0\%\\
+	Network utilization: $\frac{12ms}{28ms} = .429$ 42.9\%\\
 
-	\item[d.] $2 req / .027s = 74.07req/second$
+	\item[d.] $2.26 req / .028s = 80.71req/second$ The .26 came from the 7 seconds of a new process that is handled on the first thread
 
-	\item[e.] Total time: 
+	\item[e.] Total time: 35ms (Same assumption as above)\\
+	CPU utilization: $\frac{20ms}{35ms} = .571$ 57.1\%\\
+	Disk utilization: $\frac{32ms}{35ms} = .914$ 91.4\%\\
+	Network utilization: $\frac{18ms}{35ms} = .514$ 51.4\%\\
+	Capacity: $3.63 req / .035s = 103.71req/second$
+
+	\item[f.] The max capacity is 110 requests per second.  (4 threads, and 4.84 requests being processed)
+	\item[g.] The bottleneck is the disk
+\end{enumerate}
+
+\section*{Answer 2}
+\begin{enumerate}
+	\item[a.] MPL = 4, CPU utilization = 26/44, $speedup = \frac{1}{1-\frac{26}{44} + \frac{26/44}{r}}$ 
+	\item[b.] Take $r \rarrow \inf$, $\frac{1}{1 - (26/44)} = 2.44$
+	\item[c.] Disk util = 42/44, Network util = 24/44, $speedup_{disk} = \frac{1}{1 - \frac{42}{44}} = 22$, $speedup_{network} = \frac{1}{1 - \frac{24}{44}} = 2.2$
+	\item[d.] None
+\end{enumerate}
+
+\section*{Answer 3}
+\begin{enumerate}
+	\item[a.] cache util = .95\\
+	Scenario 1 $speedup = \frac{1}{1 - .05 + .05 / 1.5} = 1.01$\\
+	Scenario 2 $speedup = \frac{1}{1 - .95 + .95 / 1.2} = 1.19$\\
+
+	\item[b.] We want to find the intersection of the two speedups\\
+	$\frac{1}{1 - h + h/1.2} = \frac{1}{1 - (1-h) + (1-h)/1.5}$ This happens when $h = .667$\\
+	So when hit rate < 66.7\%, take the memory speedup, else take the cache speedup
+
+	\item[c.] $speedup = \frac{1}{(h/1.2) + (h/1.5)}$
+\end{enumerate}
+
+\section*{Answer 4}
+\begin{enumerate}
+	\item[a.] $150/15000 = .1$ wasted for overhead  
+	$T(H,P) = 9 * (1 - P)^H$
+
+	\item[b.] $T(1,.01) = 9 * (.99) = 8.91Mpbs$
+	\item[c.] $6 < 9 * (1 - P)^H$\\
+	$.66 < (1 - P)^H$\\
+	$\sqrt[n]{.66} < 1 - P$\\
+	$P < 1 - \sqrt[n]{.66}$]]
 \end{enumerate}
 
 \end{document} 
