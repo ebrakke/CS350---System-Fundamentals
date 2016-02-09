@@ -1,0 +1,149 @@
+\documentclass[11pt]{article}
+\usepackage{amssymb,amsmath,amsthm,graphicx}
+\usepackage{fancyhdr}
+
+\def\shownotes{1}   % set 1 for version with author notes
+                    % set 0 for no notes
+
+
+
+%uncomment to get hyperlinks
+%\usepackage{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Some macros (you can ignore everything until "end of macros")
+
+\topmargin 0pt \advance \topmargin by -\headheight \advance
+\topmargin by -\headsep
+
+\textheight 8.9in
+
+\oddsidemargin 0pt \evensidemargin \oddsidemargin \marginparwidth
+0.5in
+
+\textwidth 6.5in
+
+%%%%%%
+
+\providecommand{\vs}{vs. }
+\providecommand{\ie}{\emph{i.e.,} }
+\providecommand{\eg}{\emph{e.g.,} }
+\providecommand{\cf}{\emph{cf.,} }
+\providecommand{\etc}{\emph{etc.} }
+
+\newcommand{\getsr}{\gets_{\mbox{\tiny R}}}
+\newcommand{\bits}{\{0,1\}}
+\newcommand{\bit}{\{0,1\}}
+\newcommand{\Ex}{\mathbb{E}}
+\newcommand{\eqdef}{\stackrel{def}{=}}
+\newcommand{\To}{\rightarrow}
+\newcommand{\e}{\epsilon}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Sign}{\mathsf{Sign}}
+\newcommand{\Ver}{\mathsf{Ver}}
+
+\providecommand{\mypara}[1]{\smallskip\noindent\emph{#1} }
+\providecommand{\myparab}[1]{\smallskip\noindent\textbf{#1} }
+\providecommand{\myparasc}[1]{\smallskip\noindent\textsc{#1} }
+\providecommand{\para}{\smallskip\noindent}
+
+
+\newtheorem{theorem}{Theorem}
+\theoremstyle{definition}
+\newtheorem{ex}{Exercise}
+\newtheorem{definition}{Definition}
+
+%%%%%%%  Author Notes %%%%%%%d
+%
+\ifnum\shownotes=1
+\newcommand{\authnote}[2]{{ $\ll$\textsf{\footnotesize #1 notes: #2}$\gg$}}
+\else
+\newcommand{\authnote}[2]{}
+\fi
+\newcommand{\Snote}[1]{{\authnote{Solution}{#1}}}
+\newcommand{\Inote}[1]{{\authnote{Solution}{#1}}}
+\newcommand{\Ichanged}[1]{{\authnote{Changed}{#1}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\VAR}{\mathrm{VAR}}
+
+
+
+% end of macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% page counting, header/footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\footnotesize \parbox{11cm}{CS350, Boston University, Fall 2015} }
+\rhead{Erik Brakke}
+\renewcommand{\headheight}{24pt}
+
+\begin{document}
+
+\title{Homework 2}
+\author{Erik Brakke}
+\maketitle
+
+\thispagestyle{fancy}
+ 
+ 
+\section*{Answer 1}
+\begin{enumerate}
+	\item[a.] $\Pr[\text{no connections refuesed}] = \Pr[\text{server available for each connection}] = .96^{20} = .442$
+	\item[b.] $\Pr[\text{exactly 1 connection refused}] = 20 * .04 * .96^{19} = .368$
+	\item[c.] $\Pr[\text{3 or less will be refused}] = \Pr[\text{None refused}] + \Pr[\text{1 refused}] + \Pr[\text{2 refused}] + \Pr[\text{3 refused}] = .442 + .368 + .146 + .036 = .992
+	\item[d.] $\Pr[\text{4 or more consecutive}] = .94 ^ 4 = .849$
+	\item[e.] Expected value of successful request before failure = $p / 1-p = .96 / .04 = 24$
+	\item[f.] Expected successful requests in 50 = $np = 50 * .96 = 48$
+	\item[g.] 
+	\item[h.] 
+\end{enumerate}
+
+\section*{Answer 2}
+\begin{enumerate}
+	\item[a.] $f(x) = \frac{2^x}{x!}e^{-2}$
+	\item[b.] $f(x > 3) = 1 - (f(x = 3) + f(x=2) + f(x=1)) = 1 - (.18 + .27 + .27) = .28$
+	\item[c.] $f(x) = 1 - e^{-.2x}$
+	\item[d.] $1 - f(8) = 1 - .20 = .80$
+	\item[e.] $std = 1/\lambda = 1 / 200 = 5 ms$
+	\newline
+	\item[a.] capacity = $1 / .0048 = 208.33 req/sec$
+	\item[b.] 
+	\item[c.] $\rho = \lambda * T_s = 200 * .0048 = .96$\\
+	$w = \rho^2/(1-\rho) = 23.04$ req waiting in the queue
+	\item[d.] $T_w = w/\lambda = 23.04 / 200 = 115ms$
+	\item[e.] $Slowdown = 1/(1-\rho) = 1/.04 = 25$ 
+\end{enumerate}
+
+\section*{Answer 3}
+\begin{enumerate}
+	\item[a.] \includegraphics*[scale=0.5]{Q3A.png}
+	Yes they do match.  We generated 100 exponential variables, so it would makes sense that these random variable should follow the CDF of exponential random variable.  Obviously the graph I generated
+	was a bit more jagged than the ideal graph, but given a sufficient amount of points, the graph would continue to smooth outer
+	
+	\item[b.] $f(x) = \frac{\lambda^x}{x!}e^{-\lambda}\\
+	\includegraphics*[scale=0.5]{q3b.png}
+\end{enumerate}
+
+\section*{Answer 4}
+\begin{enumerate}
+	\item[a.] $f(x) = \{1: .5, 3: .3, 10: .14, 30: .06, else: 0\}$
+	\item[b.] $E[x] = 1*.5 + 3*.3 + 10*.14 + 30*.06 = 4.6seconds$
+	\item[c.] $var = \sqrt{.5*(1 - 4.6)^2 + .3*(3-4.6)^2 + .14*(10-4.6)^2 + .06*(30 - 4.6)^2} = 7.07
+	\item[d.] See code
+\end{enumerate}
+
+\section*{Answer 5}
+\begin{enumerate}
+	\item[a.] \includegraphics*[scale=0.5]{q5a.png}\\
+	The plots match roughly.  $\Pr[X < 0] = .42$ when it should really be = .50, though as we look at x<1, x<2, x<3, etc... we see that the CDF follows the actual normal CDF more closely.
+	This is because we only took 100 samples.  If we took more we would see the distribution following the actual more closely
+	
+	\item[b.]
+\end{document} 
