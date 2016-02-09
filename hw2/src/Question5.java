@@ -16,16 +16,24 @@ public class Question5 {
         return (sum - 15) / (Math.sqrt(30) * (1/Math.sqrt(12.0)));
     }
 
+    public static double PartB(){
+        double sum = 0.0;
+        for(int i = 0; i < 256; i++){
+            sum += ZRand();
+        }
+        return sum + 72;
+    }
+
     public static void main(String[] args){
 
         //Part a
+        /*
         double[] values = new double[100];
         for(int i = 0; i < 100; i++){
             values[i] = ZRand();
         }
         Arrays.sort(values);
 
-        /*
         try {
             FileWriter writer = new FileWriter("q5a.txt");
             for (Double v : values) {
@@ -39,6 +47,13 @@ public class Question5 {
         }*/
 
         //Part b
-        
+        int count = 0;
+        for(int i = 0; i < 1000; i++){
+            double r = PartB();
+            if (r >= 66 && r <= 80){
+                count++;
+            }
+        }
+        System.out.println(count / 1000.0);
     }
 }

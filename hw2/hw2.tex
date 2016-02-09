@@ -97,11 +97,13 @@
 \begin{enumerate}
 	\item[a.] $\Pr[\text{no connections refuesed}] = \Pr[\text{server available for each connection}] = .96^{20} = .442$
 	\item[b.] $\Pr[\text{exactly 1 connection refused}] = 20 * .04 * .96^{19} = .368$
-	\item[c.] $\Pr[\text{3 or less will be refused}] = \Pr[\text{None refused}] + \Pr[\text{1 refused}] + \Pr[\text{2 refused}] + \Pr[\text{3 refused}] = .442 + .368 + .146 + .036 = .992
+	\item[c.] $\Pr[\text{3 or less will be refused}] = \Pr[\text{None refused}] + \Pr[\text{1 refused}] + \Pr[\text{2 refused}] + \Pr[\text{3 refused}] = .442 + .368 + .146 + .036 = .992$
 	\item[d.] $\Pr[\text{4 or more consecutive}] = .94 ^ 4 = .849$
 	\item[e.] Expected value of successful request before failure = $p / 1-p = .96 / .04 = 24$
 	\item[f.] Expected successful requests in 50 = $np = 50 * .96 = 48$
-	\item[g.] 
+	\item[g.] Take $X$ to be a RV with outcomes $1, p = .96$ and $0, p = .04$\\
+	We can apply the central limit theorm here.  This will follow a normal distribution\\
+	This gives us $Pr[X > .95*n] = \Pr[1]$
 	\item[h.] 
 \end{enumerate}
 
@@ -127,7 +129,7 @@
 	Yes they do match.  We generated 100 exponential variables, so it would makes sense that these random variable should follow the CDF of exponential random variable.  Obviously the graph I generated
 	was a bit more jagged than the ideal graph, but given a sufficient amount of points, the graph would continue to smooth outer
 	
-	\item[b.] $f(x) = \frac{\lambda^x}{x!}e^{-\lambda}\\
+	\item[b.] $f(x) = \frac{\lambda^x}{x!}e^{-\lambda}$\\
 	\includegraphics*[scale=0.5]{q3b.png}
 \end{enumerate}
 
@@ -135,7 +137,7 @@
 \begin{enumerate}
 	\item[a.] $f(x) = \{1: .5, 3: .3, 10: .14, 30: .06, else: 0\}$
 	\item[b.] $E[x] = 1*.5 + 3*.3 + 10*.14 + 30*.06 = 4.6seconds$
-	\item[c.] $var = \sqrt{.5*(1 - 4.6)^2 + .3*(3-4.6)^2 + .14*(10-4.6)^2 + .06*(30 - 4.6)^2} = 7.07
+	\item[c.] $var = \sqrt{.5*(1 - 4.6)^2 + .3*(3-4.6)^2 + .14*(10-4.6)^2 + .06*(30 - 4.6)^2} = 7.07$
 	\item[d.] See code
 \end{enumerate}
 
@@ -145,5 +147,13 @@
 	The plots match roughly.  $\Pr[X < 0] = .42$ when it should really be = .50, though as we look at x<1, x<2, x<3, etc... we see that the CDF follows the actual normal CDF more closely.
 	This is because we only took 100 samples.  If we took more we would see the distribution following the actual more closely
 	
-	\item[b.]
+	\item[b.] Using the java program (see PartB in Question5.class) I generated 1000 random numbers.  If they were between 66 and 80, I added 1 to a counter.  At the end I took the count and 
+	divided by 1000, to get .375\\
+	Doing this with the equation, $z = 66 - 72 / 16 = -.375$ rouding to .38\\
+	$z = 80 - 72 / 16 = .5$\\
+	We get that $f(z < -.38) = .3156$, $f(z < .5) = .6915$\\
+	So $F(-.38 < z < .5) = .6915 - .3156 = .3759$
+	\newline
+	We can see that the numbers are extrememly close to one another.
+\end{enumerate}
 \end{document} 
