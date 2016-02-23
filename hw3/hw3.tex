@@ -1,0 +1,167 @@
+\documentclass[11pt]{article}
+\usepackage{amssymb,amsmath,amsthm,graphicx}
+\usepackage{fancyhdr}
+
+\def\shownotes{1}   % set 1 for version with author notes
+                    % set 0 for no notes
+
+
+
+%uncomment to get hyperlinks
+%\usepackage{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Some macros (you can ignore everything until "end of macros")
+
+\topmargin 0pt \advance \topmargin by -\headheight \advance
+\topmargin by -\headsep
+
+\textheight 8.9in
+
+\oddsidemargin 0pt \evensidemargin \oddsidemargin \marginparwidth
+0.5in
+
+\textwidth 6.5in
+
+%%%%%%
+
+\providecommand{\vs}{vs. }
+\providecommand{\ie}{\emph{i.e.,} }
+\providecommand{\eg}{\emph{e.g.,} }
+\providecommand{\cf}{\emph{cf.,} }
+\providecommand{\etc}{\emph{etc.} }
+
+\newcommand{\getsr}{\gets_{\mbox{\tiny R}}}
+\newcommand{\bits}{\{0,1\}}
+\newcommand{\bit}{\{0,1\}}
+\newcommand{\Ex}{\mathbb{E}}
+\newcommand{\eqdef}{\stackrel{def}{=}}
+\newcommand{\To}{\rightarrow}
+\newcommand{\e}{\epsilon}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Sign}{\mathsf{Sign}}
+\newcommand{\Ver}{\mathsf{Ver}}
+
+\providecommand{\mypara}[1]{\smallskip\noindent\emph{#1} }
+\providecommand{\myparab}[1]{\smallskip\noindent\textbf{#1} }
+\providecommand{\myparasc}[1]{\smallskip\noindent\textsc{#1} }
+\providecommand{\para}{\smallskip\noindent}
+
+
+\newtheorem{theorem}{Theorem}
+\theoremstyle{definition}
+\newtheorem{ex}{Exercise}
+\newtheorem{definition}{Definition}
+
+%%%%%%%  Author Notes %%%%%%%d
+%
+\ifnum\shownotes=1
+\newcommand{\authnote}[2]{{ $\ll$\textsf{\footnotesize #1 notes: #2}$\gg$}}
+\else
+\newcommand{\authnote}[2]{}
+\fi
+\newcommand{\Snote}[1]{{\authnote{Solution}{#1}}}
+\newcommand{\Inote}[1]{{\authnote{Solution}{#1}}}
+\newcommand{\Ichanged}[1]{{\authnote{Changed}{#1}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\VAR}{\mathrm{VAR}}
+
+
+
+% end of macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% page counting, header/footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\footnotesize \parbox{11cm}{CS350, Boston University, Fall 2015} }
+\rhead{Erik Brakke}
+\renewcommand{\headheight}{24pt}
+
+\begin{document}
+
+\title{Homework 3}
+\author{Erik Brakke}
+\maketitle
+
+\thispagestyle{fancy}
+ 
+ 
+\section*{Answer 1}
+\begin{enumerate}
+	\item[a.] Using the equation, $E = Z_{\alpha/2}\frac{S}{\sqrt{n}}$, we can plug in what we know\\
+	$.4 = 2.06*S / \sqrt{40}$\\
+	This gives us a standard dev of 1.23
+	
+	\item[b.] $E = Z_{.01/2}\frac{S}{\sqrt{n}}$\\
+	$E = 2.58 * 1.23 / \sqrt{40} = .5$\\
+	So the new interval would be $3 \pm .5$\\
+	
+	\item[c.] $E = Z_{\alpha/2}\frac{S}{\sqrt{n}}$\\
+	$.1 = 2.06*1.23 / \sqrt{n}$\\
+	$n = 641.01$ so you would need to sample 642 people
+\end{enumerate}
+
+\section*{Answer 2}
+Submitting late
+See the code in the 'src' folder
+
+\section*{Answer 3}
+Converted everything from seconds to milliseconds, $\lambda = 20$, capcity $= 24000B/sec$
+\begin{enumerate}
+	\item[a.] We should use M/G/1 because the arrival rate is Poisson and we know the know the normalized value of service time standard deviation. Because the packet
+	size is unform, and the packet size is what determines the service time, we know what the mean service time is and the standard deviation.
+	
+	\item[b.] $T_s = ((100 + 1500) / 2) / 24000 = .033 ms$
+	\item[c.] $STD = ((1500 - 100) / 24000) / \sqrt{12} = .017ms$\\
+	\item[d.] $A = \frac{1}{2}(1 + (\frac{.017}{.033})^2) = .63$\\
+	$\rho = 20 * .033 = .66$\\
+	$q = \frac{.66^2 * .63}{.34} + .66 = 1.47$
+	
+	\item[e.] $w = q - \rho = .81$
+	\item[f.] $T_q = q / \lambda = 1.47 / 20 = .0735ms$
+	\item[g.] $\Pr[S_0] = 1 - \rho = .33$
+\end{enumerate}
+
+\section*{Answer 4}
+\begin{enumerate}
+	\item[a.] \includegraphics*[scale=0.5]{q4a.jpg}
+	\item[b.] Arrival rate to CPU system, $X = 40 + (0.1*X) + (0.5 * 0.1 * X + 0.4*X) = 80$\\
+	Arrival rate to Disk, $Y = 0.1*X = 8$\\
+	Arrival rate to Network, $Z = 0.4*X + 0.5*Y = 36$\\
+	\newline
+	First, find $T_q$ of CPU (M/M/2)\\
+	$\rho = \lambda * T_s / N = 80 * .02 / 2 = .8$\\
+	$C = \frac{2\rho^2}{1 + \rho} = .71$\\
+	$q = C * \frac{\rho}{1 - \rho} + N*\rho = .71 * \frac{.8}{.2} + 1.6 = 4.44$\\
+	\newline
+	Next, $T_q$ of the Disk (M/M/1)\\
+	$\rho = \lambda * T_s = 8 * .1 = .8$\\
+	$q = \frac{\rho}{1 - \rho} = .8 / .2 = 4$\\
+	\newline
+	Next, $T_q of the network (M/M/1)$\\
+	$\rho = \lambda * T_s = 36 * .025 = .9$\\
+	$q = \frac{.9}{.1} = 9$\\
+	\newline
+	Total $q = 9 + 4 + 4.44 = 17.44$
+	Total $T_q = 17.44 / 80 = .218$
+	
+	\item[c.] The bottleneck is the the network because it has the highest utilization and highest $q$\\
+	\item[d.] We need to find which processes will have $\rho > 1$ at a given arrival rate\\
+	For cpu, $\lambda = 1 / .01 = 100$\\
+	disk, $\lambda = 1 / .1 = 10$\\
+	network $\lambda = 1 / .025 = 40$\\
+	For the arrival rate $X$ to reach 100 at the CPU, $\lambda$ to the whole system would have to be $100 - .55(100) = 45$\\
+	For the arrival rate $Y$ to reach 10 at the Disk, $10 = .1(X), X = 100, \lambda = 45$\\
+	For the arrival rate $Z$ to reach 40 at the Network, $40 = .45X, X = 88.88, \lambda = 88.88 - .55(88.88)= 40$\\
+	\newline
+	We can see that if the arrival rate to the system is over 40, then the queue in the Network queue will grow infinitely long
+	
+\end{enumerate}
+\end{document} 

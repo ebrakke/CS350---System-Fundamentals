@@ -16,8 +16,10 @@ public class Simulator {
     public static ArrayList<Double> Tq = new ArrayList<Double>();
     public static ArrayList<Double> Tw = new ArrayList<Double>();
     public static ArrayList<Double> Ts = new ArrayList<Double>();
+    public static ArrayList<Double> w = new ArrayList<Double>();
+    public static ArrayList<Double> q = new ArrayList<Double>();
 
-    public static Queue<Event> buffer = new LinkedList<Event>();
+    public static LinkedList<Event> buffer = new LinkedList<Event>();
     
     public Simulator(double lambda, double serviceTime, double simulationTime, double monitorLambda){
         Simulator.lambda = lambda;
@@ -47,6 +49,7 @@ public class Simulator {
             currentTime = nextEvent.arrivalTime;
             nextEvent.Process();
         }
+        System.out.println("Average Buffer Size: " + Average(w));
     }
 
     public static void main(String[] args) {

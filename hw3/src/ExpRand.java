@@ -12,5 +12,6 @@ public class ExpRand {
         double expValue = -1 * (Math.log(1 - normalValue)) / lambda;
         return expValue;
     }
+
 }
 
