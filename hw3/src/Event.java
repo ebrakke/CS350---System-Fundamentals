@@ -11,7 +11,6 @@ public class Event {
     public double serviceTime;
     public String type;
     public double deathTime;
-    public static int monitorCount = 1;
 
     public Event(double arrivalTime, String type){
         this.arrivalTime = arrivalTime;
@@ -28,34 +27,21 @@ public class Event {
         }
         if (isDeath()) {
             Event e = Simulator.buffer.remove();
-            Simulator.Tq.add(e.deathTime - e.arrivalTime);
-            Simulator.Ts.add(e.serviceTime);
-            Simulator.Tw.add(e.deathTime - e.serviceTime - e.arrivalTime);
+            State.Tq.add(e.deathTime - e.arrivalTime);
+            State.Ts.add(e.serviceTime);
+            State.Tw.add(e.deathTime - e.serviceTime - e.arrivalTime);
         }
         if (isMonitor()) {
-            Simulator.w.add((Simulator.buffer.size() - 1 < 0) ? 0.0 : (Simulator.buffer.size() - 1));
-            Simulator.q.add((double)Simulator.buffer.size());
+            State.w.add((Simulator.buffer.size() - 1 < 0) ? 0.0 : (Simulator.buffer.size() - 1));
+            State.q.add((double)Simulator.buffer.size());
 
-            String s = "Monitor " + Event.monitorCount + ": " +
-                    "Buffer size: " + Simulator.Average(Simulator.w) +
-                    " Queue size: " + Simulator.Average(Simulator.q) +
-                    " Current Tq: " + Simulator.Average(Simulator.Tq) +
-                    " Current Tw: " + Simulator.Average(Simulator.Tw) +
-                    " Current Ts: " + Simulator.Average(Simulator.Ts);
-            Log(s);
-            Event.monitorCount++;
-
+            String s = State.Average(State.w) +
+                    "," + State.Average(State.q) +
+                    "," + State.Average(State.Tq) +
+                    "," + State.Average(State.Tw) +
+                    "," + State.Average(State.Ts);
+            State.Log(s);
             Schedule.ScheduleNextEvent(CreateMonitor(Simulator.currentTime));
-        }
-    }
-
-    public void Log(String s) {
-        try {
-            BufferedWriter out = new BufferedWriter(new FileWriter("log.txt", true));
-            out.write(s + '\n');
-            out.close();
-        } catch (IOException e){
-            return;
         }
     }
 

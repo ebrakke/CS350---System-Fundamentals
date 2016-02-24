@@ -12,12 +12,6 @@ public class Simulator {
     public static double simulationTime;
     public static double monitorLambda;
 
-    //Monitor variables
-    public static ArrayList<Double> Tq = new ArrayList<Double>();
-    public static ArrayList<Double> Tw = new ArrayList<Double>();
-    public static ArrayList<Double> Ts = new ArrayList<Double>();
-    public static ArrayList<Double> w = new ArrayList<Double>();
-    public static ArrayList<Double> q = new ArrayList<Double>();
 
     public static LinkedList<Event> buffer = new LinkedList<Event>();
     
@@ -30,30 +24,30 @@ public class Simulator {
     public void Initialize(){
         double firstIat = ExpRand.Generate(lambda);
         Schedule.ScheduleNextEvent(new Event(firstIat, "Birth"));
-        Schedule.ScheduleNextEvent(new Event(0, "Monitor"));
-    }
-
-    public static double Average(ArrayList<Double> a){
-        double sum = 0.0;
-        for(Double n : a){
-            sum += n;
-        }
-        return sum / a.size();
+        Schedule.ScheduleNextEvent(new Event(50, "Monitor"));
     }
 
     public void Simulate() {
         Initialize();
+
+        //Put headers into the log file
+        State.OpenFile("q2d_log.csv");
+        State.Log("w,q,Tq,Tw,Ts");
 
         while(currentTime <= simulationTime) {
             Event nextEvent = Schedule.GetNextEvent();
             currentTime = nextEvent.arrivalTime;
             nextEvent.Process();
         }
-        System.out.println("Average Buffer Size: " + Average(w));
+        State.CloseFile();
     }
 
     public static void main(String[] args) {
-        Simulator s = new Simulator(60, .015, 100, 10);
+        //Simulator s = new Simulator(60, .015, 100, 120);
+        //Simulator s = new Simulator(50, .015, 100, 100);
+        //Simulator s = new Simulator(65, .015, 150, 130);
+        Simulator s = new Simulator(65, .020, 150, 130);
+
         s.Simulate();
 
     }
