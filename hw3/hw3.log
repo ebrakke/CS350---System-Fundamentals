@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.2.23)  23 FEB 2016 14:32
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.2.23)  23 FEB 2016 22:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -241,58 +241,57 @@ Underfull \hbox (badness 10000) in paragraph at lines 102--105
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 122--123
-
- []
-
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-<q4a.jpg, id=17, 721.69624pt x 696.6025pt>
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
+
+ []
+
+<q4a.jpg, id=16, 721.69624pt x 696.6025pt>
 File: q4a.jpg Graphic file (type jpg)
  <use q4a.jpg>
-Package pdftex.def Info: q4a.jpg used on input line 134.
+Package pdftex.def Info: q4a.jpg used on input line 155.
 (pdftex.def)             Requested size: 360.84724pt x 348.3004pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 135--154
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 135--154
+ [2]
+Underfull \hbox (badness 10000) in paragraph at lines 156--175
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--154
+Underfull \hbox (badness 10000) in paragraph at lines 156--175
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--154
-
- []
-
-[2 <./q4a.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 155--156
+Underfull \hbox (badness 10000) in paragraph at lines 156--175
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 156--165
+Underfull \hbox (badness 10000) in paragraph at lines 156--175
 
  []
 
-[3] (./hw3.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 176--177
+
+ []
+
+[3 <./q4a.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 177--186
+
+ []
+
+[4] (./hw3.aux) ) 
 Here is how much of TeX's memory you used:
- 2632 strings out of 495028
- 33663 string characters out of 6181497
+ 2633 strings out of 495028
+ 33681 string characters out of 6181497
  92626 words of memory out of 5000000
- 5803 multiletter control sequences out of 15000+600000
+ 5804 multiletter control sequences out of 15000+600000
  12927 words of font info for 50 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,13n,43p,236b,371s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,13n,43p,236b,374s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></
@@ -304,10 +303,10 @@ fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmsy8.pfb>
-Output written on hw3.pdf (3 pages, 228397 bytes).
+Output written on hw3.pdf (4 pages, 231872 bytes).
 PDF statistics:
- 61 PDF objects out of 1000 (max. 8388607)
- 42 compressed objects within 1 object stream
+ 64 PDF objects out of 1000 (max. 8388607)
+ 44 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  12 words of extra memory for PDF output out of 10000 (max. 10000000)
 
