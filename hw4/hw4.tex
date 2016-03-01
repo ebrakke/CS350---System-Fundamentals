@@ -115,4 +115,35 @@ Converted everything to milliseconds
 		  preferred over a long delay to hear the one's voice
 \end{enumerate}
 
+\section*{Answer 2}
+\begin{enumerate}
+	\item[a.] Expected results: $\rho = 1, \Pr(S_k) = .25, q = 1.5, T_q = 1.5/37.5 = 40ms$\\
+	Using Excel, Actual results were $\Pr(S_k) = .2475, q = 1.54 \pm .0012, T_q = 40.9ms \pm .005$\\
+	$E_q = 1.96 * .05 / \sqrt{6058} = .0012$\\
+	$E_{Tq} = 1.96 * .0002 / \sqrt{6058} = .005ms$\\
+	The results were very close to actual in this case\\
+	
+	\item[b.] Expected results: $\rho = .75, \Pr(S_k) = \frac{.25 * .75^3}{1 - .75^4} = .154, \lambda' = 42.3, q = .63, T_q = .014$\\
+	Actual results were $\Pr(S_k) = .136, q = 1.04 \pm .0001, T_q = 26ms \pm .002$\\
+	$E_q = 1.96 * .058 / \sqrt{5881} = .0014$\\
+	$E_{Tq} = 1.96 * .0001 / \sqrt{5881} = .002ms$\\
+	These results were farther off from the expected, but a much longer simulation may have yeilded closer results
+	
+	\item[c.] Expected results: $\rho = .975, \Pr(S_k) = \frac{.025 * .975^3}{1 -.975^4} = .24, \lambda' = 49.4, q = .741, T_q = .015$\\
+	Actual results were $\Pr(S_k) = .245, q = 1.54 \pm .0011, T_q = 30ms \pm .005$\\
+	$E_q = 1.96 * .057 / \sqrt{10342} = .0011$\\
+	$E_{Tq} = 1.96 * .0003 / \sqrt{10342} = .005ms$\\
+	The dropped percentage was almost spot on, however $q$ and $t_q$ were almost double what they should have been
+	
+	\item[d.] Results: $q = 1.09\pm .00013, T_q = 24ms \pm .02, Pr(S_k) = .085$
+	$E_q = 1.96 * .006 / \sqrt{8002} = .00013$\\
+	$E_{Tq} = 1.96 * .001 / \sqrt{8002} = .0219ms$\\
+	The rejection probability is much less.  This is because we know that service time will always be .015, then requests will not have to wait as long and therefore	
+	there will be more buffer space available for incoming requests
+	
+	\item[e.] Results: $q = 1.52, T_q = 27ms, Pr(S_k) = .183$
+	Again, $q$ and $T_q$ were about the same, but the probability of a request being dropped is much less.  This expected when the service time is deterministic
+
+\end{enumerate}
+	
 \end{document} 
