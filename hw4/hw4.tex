@@ -1,0 +1,118 @@
+\documentclass[11pt]{article}
+\usepackage{amssymb,amsmath,amsthm,graphicx}
+\usepackage{fancyhdr}
+
+\def\shownotes{1}   % set 1 for version with author notes
+                    % set 0 for no notes
+
+
+
+%uncomment to get hyperlinks
+%\usepackage{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Some macros (you can ignore everything until "end of macros")
+
+\topmargin 0pt \advance \topmargin by -\headheight \advance
+\topmargin by -\headsep
+
+\textheight 8.9in
+
+\oddsidemargin 0pt \evensidemargin \oddsidemargin \marginparwidth
+0.5in
+
+\textwidth 6.5in
+
+%%%%%%
+
+\providecommand{\vs}{vs. }
+\providecommand{\ie}{\emph{i.e.,} }
+\providecommand{\eg}{\emph{e.g.,} }
+\providecommand{\cf}{\emph{cf.,} }
+\providecommand{\etc}{\emph{etc.} }
+
+\newcommand{\getsr}{\gets_{\mbox{\tiny R}}}
+\newcommand{\bits}{\{0,1\}}
+\newcommand{\bit}{\{0,1\}}
+\newcommand{\Ex}{\mathbb{E}}
+\newcommand{\eqdef}{\stackrel{def}{=}}
+\newcommand{\To}{\rightarrow}
+\newcommand{\e}{\epsilon}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Sign}{\mathsf{Sign}}
+\newcommand{\Ver}{\mathsf{Ver}}
+
+\providecommand{\mypara}[1]{\smallskip\noindent\emph{#1} }
+\providecommand{\myparab}[1]{\smallskip\noindent\textbf{#1} }
+\providecommand{\myparasc}[1]{\smallskip\noindent\textsc{#1} }
+\providecommand{\para}{\smallskip\noindent}
+
+
+\newtheorem{theorem}{Theorem}
+\theoremstyle{definition}
+\newtheorem{ex}{Exercise}
+\newtheorem{definition}{Definition}
+
+%%%%%%%  Author Notes %%%%%%%d
+%
+\ifnum\shownotes=1
+\newcommand{\authnote}[2]{{ $\ll$\textsf{\footnotesize #1 notes: #2}$\gg$}}
+\else
+\newcommand{\authnote}[2]{}
+\fi
+\newcommand{\Snote}[1]{{\authnote{Solution}{#1}}}
+\newcommand{\Inote}[1]{{\authnote{Solution}{#1}}}
+\newcommand{\Ichanged}[1]{{\authnote{Changed}{#1}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\VAR}{\mathrm{VAR}}
+
+
+
+% end of macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% page counting, header/footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\footnotesize \parbox{11cm}{CS350, Boston University, Fall 2015} }
+\rhead{Erik Brakke}
+\renewcommand{\headheight}{24pt}
+
+\begin{document}
+
+\title{Homework 4}
+\author{Erik Brakke}
+\maketitle
+
+\thispagestyle{fancy}
+ 
+ 
+\section*{Answer 1}
+Converted everything to milliseconds
+\begin{enumerate}
+	\item[a.] MM1K makes sense here because here because arrivals are poisson, service time is exponential, there is a single server, and there is a finite buffer
+	
+	\item[b.] $T_s = 20, \lambda = .05, \rho = 1$, so $q = K/2 = 1.5$\\
+		  $\Pr(S_k) = 1/K+1 = .25$, so $\lambda' = .05*(.75) = .0375$ making $\rho_{effective} = .75$\\
+		  Thus, $w = 1.5 - .75 = .75$
+	\item[c.] $\Pr(S_k) = .25$, so to find the expected value of a blips, we want $2000 * .25 = 500$\\
+		To find plops, we want to find $\Pr(S_0) = 1 - \rho_{effective} = .25$\\
+		Thus, we expect 500 plops
+	\item[d.] $T_q = q / \lambda' = 1.5 / .0375 = 40$
+	\item[e.] $q = 5, \Pr(S_k) = 1/11, \lambda' = (.05)*(10/11) = .045$\\
+		  $T_q = 5 / .045 = 111.11$
+	\item[f.] This makes sense.  Increasing K will just increase the mean time that a packet is in the system.  The system cannot process any faster, but it is just holding more packets at a time in the buffer
+	\item[g.] The advantage of increased buffer sizes is that less packets will be dropped and therefore there will be less retransmission of packets.  However, as the buffers increase, more space is taken up in the server
+		  and the packets will just sit in the buffer longer.  If packets are time sensitive, then Increasing buffer size will not make them get to  the destination faster
+	\item[h.] I would recommend a small value for K.  Loss of a few packets is not detremental to the experience of watching a movie (i.e. loss of quality is preferred).  Having a large K would just lead to packets taking
+		  longer to reach the destination, resulting in video that pauses frequently as it waits for the next packet.  My answer is no different for Teleconferencing as it has the same properties.  Loss of quality is
+		  preferred over a long delay to hear the one's voice
+\end{enumerate}
+
+\end{document} 
