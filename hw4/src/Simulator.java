@@ -13,12 +13,12 @@ public class Simulator {
     //public static Sys sys = new Sys(50, new ServiceTime("M", .015), 1, 3, true); //2b
     //public static Sys sys = new Sys(65, new ServiceTime("M", .015), 1, 3, true); //2c
     //public static Sys sys = new Sys(50, new ServiceTime("F", .015), 1, 3, true); //2d
-    public static Sys sys = new Sys(65, new ServiceTime("F", .015), 1, 3, true); //2e
+    //public static Sys sys = new Sys(65, new ServiceTime("F", .015), 1, 3, true); //2e
 
     //Question 3
-    //public static Sys CPU = new Sys(40, new ServiceTime("U", new double[]{.001,.039}), 2, true);
-    //public static Sys Disk = new Sys(0, new ServiceTime("N", 100, .030), 1, false);
-    //public static Sys Network = new Sys(0,new ServiceTime("F", .035), 1, false);
+    public static Sys CPU = new Sys(40, new ServiceTime("U", new double[]{.001,.039}), 1, true);
+    public static Sys Disk = new Sys(0, new ServiceTime("N", 100, .030), 1, false);
+    public static Sys Network = new Sys(0,new ServiceTime("F", .035), 1, false);
 
     public Simulator(double simulationTime, double monitorLambda){
         Simulator.simulationTime = simulationTime;
@@ -27,42 +27,42 @@ public class Simulator {
 
     public void Initialize(){
         //Question 2
-        double firstIat = sys.getNextArrival();
-        Schedule.ScheduleNextEvent(new Event(firstIat, "Birth", sys));
-        Schedule.ScheduleNextEvent(new Event(5, "Monitor", sys));
+//        double firstIat = sys.getNextArrival();
+//        Schedule.ScheduleNextEvent(new Event(firstIat, "Birth", sys));
+//        Schedule.ScheduleNextEvent(new Event(5, "Monitor", sys));
 
         //Question 3
-        //double firstIat = CPU.getNextArrival();
-        //Schedule.ScheduleNextEvent(new Event(firstIat, "Birth", CPU));
-        //Schedule.ScheduleNextEvent(new Event(5, "Monitor", CPU));
+        double firstIat = CPU.getNextArrival();
+        Schedule.ScheduleNextEvent(new Event(firstIat, "Birth", CPU));
+        Schedule.ScheduleNextEvent(new Event(5, "Monitor", CPU));
     }
 
     public static Sys getNextSystem(Sys prev){
         // Question 2
-        return prev;
+        //return null;
 
         //Question 3
-//        double r = Rand.UniGenerate(new double[]{0,1});
-//        if(prev.equals(CPU)){
-//            if (r < 0.1){
-//                return Disk;
-//            } else if(r >= 0.1 && r < .5) {
-//                return Network;
-//            }
-//        }
-//
-//        if(prev.equals(Disk)){
-//            if (r < 0.5){
-//                return Network;
-//            } else {
-//                return Disk;
-//            }
-//        }
-//
-//        if(prev.equals(Network)){
-//            return Disk;
-//        }
-//        return null;
+        double r = Rand.UniGenerate(new double[]{0,1});
+        if(prev.equals(CPU)){
+            if (r < 0.1){
+                return Disk;
+            } else if(r >= 0.1 && r < .5) {
+                return Network;
+            }
+        }
+
+        if(prev.equals(Disk)){
+            if (r < 0.5){
+                return Network;
+            } else {
+                return Disk;
+            }
+        }
+
+        if(prev.equals(Network)){
+            return Disk;
+        }
+        return null;
     }
 
     public void Simulate() {

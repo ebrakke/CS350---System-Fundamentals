@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -10,6 +11,7 @@ public class Sys implements ISystem {
     private int bufferSize = -1;
     public int numberOfServers = 1;
     private LinkedList<Event> buffer = new LinkedList<Event>();
+    private LinkedList<Event> processer = new LinkedList<Event>();
 
     public State state = new State();
 
@@ -29,13 +31,11 @@ public class Sys implements ISystem {
     }
 
     public double getRequestsInBuffer() {
-        // -1 because the first event in the buffer is actually being processed
-        int size = buffer.size() - 1;
-        return size < 0 ? 0 : size;
+        return buffer.size();
     }
 
     public double getRequestsInSystem(){
-        return buffer.size();
+        return buffer.size() + processer.size();
     }
 
     public boolean isFiniteQueue(){
@@ -46,31 +46,40 @@ public class Sys implements ISystem {
         return serviceTime.getServiceTime();
     }
 
-    public Event getLastEvent(){
-        if(getRequestsInSystem() < numberOfServers){
+    public Event getLastEventToFinish(){
+        if(processer.size() <= numberOfServers && buffer.size() == 0){
+            // There's an open server, so serve request now
             return null;
-        } else if(getRequestsInSystem() == numberOfServers){
-            return buffer.peekFirst();
         }
-        return buffer.peekLast();
+        if(processer.size() == numberOfServers && buffer.size() <= numberOfServers){
+            return (Event)processer.toArray()[buffer.size() - 1];
+        }
+        return (Event)buffer.toArray()[buffer.size() - processer.size() - 1];
     }
 
     public int getBufferSize(){
         return bufferSize;
     }
 
-    public boolean addEventToBuffer(Event e){
+    public boolean addEvent(Event e){
         state.recievedPackets++;
-        if(isFiniteQueue() && getRequestsInSystem() == bufferSize){
+        if(isFiniteQueue() && getRequestsInBuffer() == bufferSize){
             state.droppedPackets++;
             return false;
+        }
+        if(buffer.size() == 0 && processer.size() < numberOfServers){
+            processer.add(e);
+            return true;
         }
         buffer.add(e);
         return true;
     }
 
     public Event processNextEvent(){
-        Event e = buffer.remove();
+        Event e = processer.remove();
+        if(buffer.size() > 0){
+            processer.add(buffer.remove());
+        }
         return e;
     }
 
@@ -80,6 +89,35 @@ public class Sys implements ISystem {
 
     public double getNextArrival(){
         return Rand.ExpGenerate(arrivalRate);
+    }
+
+    public static void main(String[] args){
+        Sys s = new Sys(40, new ServiceTime("M", 0.15), 2, true);
+        Event[] events = new Event[10];
+        for(int i = 0; i < 10; i++){
+            events[i] = new Event(0, "Birth", s);
+        }
+        s.addEvent(events[0]);
+        System.out.println(s.getLastEventToFinish() == null);
+        s.addEvent(events[1]);
+        System.out.println(s.getLastEventToFinish() == null);
+
+        s.addEvent(events[2]);
+        System.out.println(s.getLastEventToFinish().equals(events[0]));
+
+        s.addEvent(events[3]);
+        s.addEvent(events[4]);
+        s.addEvent(events[5]);
+        System.out.println(s.getLastEventToFinish().equals(events[3]));
+
+        s.addEvent(events[6]);
+        System.out.println(s.getLastEventToFinish().equals(events[4]));
+
+        Sys s1 = new Sys(40, new ServiceTime("M", 0.15), 1, true);
+
+        s1.addEvent(events[0]);
+        s1.addEvent(events[1]);
+        System.out.println(s1.getLastEventToFinish().equals(events[0]));
     }
 
 }

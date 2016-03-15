@@ -6,9 +6,9 @@ public interface ISystem {
     public double getRequestsInSystem();
     public boolean isFiniteQueue();
     public double generateServiceTime();
-    public Event getLastEvent();
+    public Event getLastEventToFinish();
     public int getBufferSize();
-    public boolean addEventToBuffer(Event e);
+    public boolean addEvent(Event e);
     public Event processNextEvent();
     public double getArrivalRate();
 }

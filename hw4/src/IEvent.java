@@ -6,7 +6,7 @@ public interface IEvent {
     public boolean isBirth();
     public boolean isDeath();
     public boolean isMonitor();
-    public Event CreateBirth(double currentTime);
-    public Event CreateDeath(double currentTime, Event last);
-    public Event CreateMonitor(double currentTime);
+    public Event CreateBirth();
+    public Event CreateDeath(Event last);
+    public Event CreateMonitor();
 }
