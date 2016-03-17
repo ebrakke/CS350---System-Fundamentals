@@ -108,6 +108,7 @@ See code in the 'src' folder
 	\item[RR: ] The average slowdown for CPU bound jobs was 3.3 and the average slowdown for IO bound jobs was 17.02\\
 	RR with quantum 100ms does a much better job allowing IO bound jobs to finish.  The slowdown they experienced compared to FCFS was much better.  Though IO bound jobs
 	would still prefer SRTN as this means they will almost always get serviced before a job that will take longer than theirs.
+\end{enumerate}
 
 \section*{Answer 3}
 \begin{enumerate}
@@ -128,7 +129,7 @@ See code in the 'src' folder
 		\item N = 100.  Again as above, it is unlikely that a request will come for a non-cached file, and because it is only a medium load, it is unlikely that many requests will 'cut' the request for the
 		non-cached file
 		\item N = 1. There is no use in using the cache as the files requested will most likely not be in the cache. This way we favor fairness as it doesn't make sense to serve a smaller file first (which would happen if N > 1)
-		\item N = 10. We want N > 1 because now the cache will be of use, however we do not want N = 100 because there is a heavy load on the server.  It is likely that a request for a non-cached file will get served last as a lot
+		\item N = 10. We want $N > 1$ because now the cache will be of use, however we do not want N = 100 because there is a heavy load on the server.  It is likely that a request for a non-cached file will get served last as a lot
 		of requests will end up in Q1.  To strike a balance between speed and fairness, N = 10 will ensure that only 10 requests can be processed ahead of a request for a non-cached file.
 		\end{enumerate}
 \end{enumerate}
@@ -153,6 +154,14 @@ See code in the 'src' folder
 	
 	\item[d.] If C arrives before A and B, then A will be blocked by C needing to use R, but C will also have to compete with B for resources.  It will take 40 seconds for C to finish it's job, and then A will be able to go
 	for it's 5 second time.  So worst case it will take 45 seconds
+	
+	\item[e.] Priority inversion is when the medium priority task can preempt the high priority task thus inverting the priorities of the two tasks.  In this case the medium task was able to get the lock while the high priorty 
+	task was blocked, thus the medium task was able to run before the high priority task.
+	
+	\item[f.] Priority inheritence means that if a lower priority task is blocking other tasks (medium and high), then the lower task will get 'promoted' to that of the highest priority being blocked.  Thus, the medium priority task cannot
+	preempt the high priority task
+	
+	\item[g.] Worst case would now be 25 seconds.  This is because as soon as A requests R, C is promoted higher than B and thus C will not have to wait for every B task to finish.  
 \end{enumerate}
 
 \end{document} 
