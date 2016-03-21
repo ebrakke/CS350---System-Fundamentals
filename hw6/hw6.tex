@@ -1,0 +1,115 @@
+\documentclass[11pt]{article}
+\usepackage{amssymb,amsmath,amsthm,graphicx}
+\usepackage{fancyhdr}
+
+\def\shownotes{1}   % set 1 for version with author notes
+                    % set 0 for no notes
+
+
+
+%uncomment to get hyperlinks
+%\usepackage{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Some macros (you can ignore everything until "end of macros")
+
+\topmargin 0pt \advance \topmargin by -\headheight \advance
+\topmargin by -\headsep
+
+\textheight 8.9in
+
+\oddsidemargin 0pt \evensidemargin \oddsidemargin \marginparwidth
+0.5in
+
+\textwidth 6.5in
+
+%%%%%%
+
+\providecommand{\vs}{vs. }
+\providecommand{\ie}{\emph{i.e.,} }
+\providecommand{\eg}{\emph{e.g.,} }
+\providecommand{\cf}{\emph{cf.,} }
+\providecommand{\etc}{\emph{etc.} }
+
+\newcommand{\getsr}{\gets_{\mbox{\tiny R}}}
+\newcommand{\bits}{\{0,1\}}
+\newcommand{\bit}{\{0,1\}}
+\newcommand{\Ex}{\mathbb{E}}
+\newcommand{\eqdef}{\stackrel{def}{=}}
+\newcommand{\To}{\rightarrow}
+\newcommand{\e}{\epsilon}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Sign}{\mathsf{Sign}}
+\newcommand{\Ver}{\mathsf{Ver}}
+
+\providecommand{\mypara}[1]{\smallskip\noindent\emph{#1} }
+\providecommand{\myparab}[1]{\smallskip\noindent\textbf{#1} }
+\providecommand{\myparasc}[1]{\smallskip\noindent\textsc{#1} }
+\providecommand{\para}{\smallskip\noindent}
+
+
+\newtheorem{theorem}{Theorem}
+\theoremstyle{definition}
+\newtheorem{ex}{Exercise}
+\newtheorem{definition}{Definition}
+
+%%%%%%%  Author Notes %%%%%%%d
+%
+\ifnum\shownotes=1
+\newcommand{\authnote}[2]{{ $\ll$\textsf{\footnotesize #1 notes: #2}$\gg$}}
+\else
+\newcommand{\authnote}[2]{}
+\fi
+\newcommand{\Snote}[1]{{\authnote{Solution}{#1}}}
+\newcommand{\Inote}[1]{{\authnote{Solution}{#1}}}
+\newcommand{\Ichanged}[1]{{\authnote{Changed}{#1}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\VAR}{\mathrm{VAR}}
+
+
+
+% end of macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% page counting, header/footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\footnotesize \parbox{11cm}{CS350, Boston University, Fall 2015} }
+\rhead{Erik Brakke}
+\renewcommand{\headheight}{24pt}
+
+\begin{document}
+
+\title{Homework 6}
+\author{Erik Brakke}
+\maketitle
+
+\thispagestyle{fancy}
+ 
+ 
+\section*{Answer 1}
+\begin{enumerate}
+	\item If a CPU bound process is running when a IO bound job arrives, the scheduler may realize that through HSN, this new IO bound job should be scheduled next.  However because it is non-preemptive,
+	the IO bound job must wait for the CPU bound job to finish. This will casue a huge slowdown for the IO bound job.
+
+	\item If there are already some jobs in the queue when an IO bound job arrives, The scheduler will attempt to schedule it at that moment.  When the IO bound job arrives, it's slowdown is 0 and will be put at the end of the queue.  If the IO bound job happened to take the least amount of CPU time, it could not preempt the current job that is running and thus would still have to wait.
+
+	\item Assuming a fixed timeout means calculating the slowdown after some fixed amount of time at arrival, this is a better solution because the scheduler is predicting what the slowdown of the job will be.
+	This ensures that fast jobs will preempt the current job that is running.  If, for example, many similar length IO bound jobs came in at the same time, each new one would preempt the old one.  This is problematic because IO bounds jobs would in general not like to be interrupted as they're using the CPU for such a small amount of time.
+
+	\item A fix for this problem would be rather than having a fixed timeout, there could be some sort of weighted timeout.  We want to make sure that IO bound jobs that arrive to the system are able to interrupt long jobs, but we do not want IO bound jobs to interrupt other IO bound jobs.  
+\end{enumerate}
+
+\section*{Answer 2}
+\begin{enumerate}
+	\item Turn = 1, P0 sets flag[0] = 1, P0 interrupted before critical section, P1 sets flag[1] = 1, P1 sees that flag[0] == 1, but that turn == 1 so it will go into the critical section.  P0 resumes in critical section and now both P0 and P1 are in the critical section
+\end{enumerate}
+
+
+\end{document} 
