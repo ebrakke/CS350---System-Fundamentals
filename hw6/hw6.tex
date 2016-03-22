@@ -103,13 +103,26 @@
 	\item Assuming a fixed timeout means calculating the slowdown after some fixed amount of time at arrival, this is a better solution because the scheduler is predicting what the slowdown of the job will be.
 	This ensures that fast jobs will preempt the current job that is running.  If, for example, many similar length IO bound jobs came in at the same time, each new one would preempt the old one.  This is problematic because IO bounds jobs would in general not like to be interrupted as they're using the CPU for such a small amount of time.
 
-	\item A fix for this problem would be rather than having a fixed timeout, there could be some sort of weighted timeout.  We want to make sure that IO bound jobs that arrive to the system are able to interrupt long jobs, but we do not want IO bound jobs to interrupt other IO bound jobs.  
+	\item A fix for this problem would be rather than having a fixed timeout, there could be some sort of weighted timeout.  We want to make sure that IO bound jobs that arrive to the system are able to interrupt long jobs, but we do not want IO bound jobs to interrupt other IO bound jobs. So if on average more IO bound jobs are arriving, the timeout can shrink, but when CPU bound jobs start arriving, the timeout can start to grow.
 \end{enumerate}
 
 \section*{Answer 2}
 \begin{enumerate}
 	\item Turn = 1, P0 sets flag[0] = 1, P0 interrupted before critical section, P1 sets flag[1] = 1, P1 sees that flag[0] == 1, but that turn == 1 so it will go into the critical section.  P0 resumes in critical section and now both P0 and P1 are in the critical section
+
+	\item instead of an out if(flag[opposite] == true), we can turn this into a while loop.  This ensures that before entering the critical second, the process will make sure the other processes will not enter the critical section
 \end{enumerate}
 
+\section*{Answer 3}
+\begin{enumerate}
+	\item Uncomment the code for 'Process' to see the ouput
+	\item Uncomment the code for 'ProcessEnhancement' in the simulation to see the output
+	\item Yes, if you make process 0 sleep right after it sets it's flag to false, process 1 can continue to beat it (uncomment part c code in 'ProcessEnhancement')
+
+	\item It will never occur because there is never a spot in Peterson where you can make Process 0 sleep and have process 1 continue to run.  Process 1 will always wait have to wait for process 0 to finish
+\end{enumerate}
+
+\section*{Answer 4}
+Running the trial 1000 times with 95\% confidence, the average number of busy waiting was 127382198 $\pm 902560.55$
 
 \end{document} 
