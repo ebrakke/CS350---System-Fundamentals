@@ -131,8 +131,25 @@ This will just emit 0 if they didn't share anything in common, otherwise it will
 
 
 \section*{Answer 2}
+See code in src folder and data in AsData.txt\\
+To achieve this, first I counted the number of occurences of each AS.  The reason behind this, is if the AS appear once, that meant that it was connected to another AS, thus its degree count should be incremented.  I emitted values of (AS, 1) where the AS is the key.  Then I reduced by summing up all of the degrees of each AS.  Next, I took this data and emitted the key as the count and the value 1.  Then reduced by key to get the degree, and then number of ASes having that degree.\\
+This is the histogram on the ASes and their degrees.  It is split into 150 buckets.  From this we can see that most ASes are on the lower end (the max being a degree of 2), but the range of degrees is quite large (up to about 6000)\\
+\includegraphics[scale=0.5]{hist}
 
+\section*{Answer 3}
+\begin{enumerate}
+  \item[a.] See src for code.  For this I read in every word and split it up into letters.  Then for every letter, if it was a vowel, I incremented the count of vowels by one.  After reading all the letters, I emitted (count, 1) to show that there was an occurence of that many vowels appearnig.  Then I just reduced by summing these up to get the number of occurrences for each vowel count\\
 
+  \item[b.]
+\end{enumerate}
+
+\section*{Answer 4}
+\begin{enumerate}
+  \item[a.] Using the same technique as above, I was able to generate a similar output\\
+  See the aws_screenshot_q4a.png for proof of running on AWS.  THe output is also in q4a_1.txt and q4a_2.txt
+
+  \item[b.]
+\end{enumerate}
 
 
 \end{document}
